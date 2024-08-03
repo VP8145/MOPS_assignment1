@@ -100,7 +100,7 @@ rf_classifier = RandomForestClassifier(random_state=42)
 
 # Tune hyperparameters using GridSearchCV
 # experimenting with number of trees 5,10,20,30 and maximum depth 3,5,7
- 
+
 param_grid = {
     'n_estimators': [5, 10, 20, 30],
     'max_depth': [3, 5, 7],
