@@ -10,9 +10,9 @@ scaler = joblib.load('scaler.joblib')
 
 
 @app.route('/')
-
 def home():
     return "LiverDisease Classifier API"
+
 
 @app.route('/predict', methods=['POST'])
 def predict():
