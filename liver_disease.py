@@ -25,19 +25,11 @@ print(data.head(2))
 class_counts = data['Dataset'].value_counts()
 print(class_counts)
 
-
-
 data.columns
-
-
-####
-# Encoding the target variable from yes/no to 1/0
 
 # Sample DataFrame
 df = pd.DataFrame(data)
-
 # Import LabelEncoder from scikit-learn
-
 
 # Initialize the LabelEncoder
 label_encoder = LabelEncoder()
@@ -49,10 +41,6 @@ df['Dataset_Encoded'] = label_encoder.fit_transform(df['Dataset'])
 df = df.drop(['Dataset'], axis=1)
 df.shape
 
-
-# based on above co relation analysis
-
-
 df = df.drop(['Total_Bilirubin'], axis=1)
 df = df.drop(['Alamine_Aminotransferase'], axis=1)
 df = df.drop(['Total_Protiens'], axis=1)
@@ -63,12 +51,8 @@ df.columns
 print('---------- After droppping columns ----------')
 print(df.head(2))
 
-
-
 scaler = MinMaxScaler()
 df = pd.DataFrame(scaler.fit_transform(df), columns=df.columns)
-
-
 
 # Separate the data into two DataFrames based on the target variable
 df_class_0 = df.loc[df['Dataset_Encoded'] == 0]
@@ -82,7 +66,9 @@ knn_imputer = KNNImputer(n_neighbors=5)
 
 # Impute for class 0
 imputer = KNNImputer(n_neighbors=5)
-df_class_0 = pd.DataFrame(imputer.fit_transform(df_class_0), columns = df.columns)
+df_class_0 = pd.DataFrame(
+    imputer.fit_transform(df_class_0),
+    columns = df.columns)
 df_class_1 = pd.DataFrame(imputer.fit_transform(df_class_1), columns = df.columns)
 df_imputed = pd.concat([df_class_0, df_class_1])
 
