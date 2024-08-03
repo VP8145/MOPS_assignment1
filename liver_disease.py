@@ -68,10 +68,10 @@ knn_imputer = KNNImputer(n_neighbors=5)
 imputer = KNNImputer(n_neighbors=5)
 df_class_0 = pd.DataFrame(
     imputer.fit_transform(df_class_0),
-    columns= df.columns)
+    columns=df.columns)
 df_class_1 = pd.DataFrame(
     imputer.fit_transform(df_class_1),
-    columns= df.columns)
+    columns=df.columns)
 df_imputed = pd.concat([df_class_0, df_class_1])
 
 # Split the data into features (X) and target (y)
@@ -100,7 +100,6 @@ rf_classifier = RandomForestClassifier(random_state=42)
 
 # Tune hyperparameters using GridSearchCV
 # experimenting with number of trees 5,10,20,30 and maximum depth 3,5,7
-# Since we have just 6 features after data cleaning and limited samples the above chosen trees and depth seems ok.
  
 param_grid = {
     'n_estimators': [5, 10, 20, 30],
@@ -126,4 +125,3 @@ joblib.dump(best_rf_model, 'best_rf_model.joblib')
 joblib.dump(scaler, 'scaler.joblib')
 
 print('Model saved')
-
