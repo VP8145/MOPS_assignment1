@@ -5,13 +5,11 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
-from sklearn.model_selection import GridSearchCV
 from sklearn.impute import KNNImputer
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import LabelEncoder
 
-
-# Please replace the location with actual filepath
-location = "liver_disease_1.csv" 
+location = "liver_disease_1.csv"
 data = pd.read_csv(location)
 data.shape
 
@@ -39,7 +37,7 @@ data.columns
 df = pd.DataFrame(data)
 
 # Import LabelEncoder from scikit-learn
-from sklearn.preprocessing import LabelEncoder
+
 
 # Initialize the LabelEncoder
 label_encoder = LabelEncoder()
@@ -48,17 +46,17 @@ label_encoder = LabelEncoder()
 df['Dataset_Encoded'] = label_encoder.fit_transform(df['Dataset'])
 
 # Display the DataFrame with label encoding
-df=df.drop(['Dataset'],axis=1)
+df=df.drop(['Dataset'], axis=1)
 df.shape
 
 
 # based on above co relation analysis
 
 
-df=df.drop(['Total_Bilirubin'],axis=1)
-df=df.drop(['Alamine_Aminotransferase'],axis=1)
-df=df.drop(['Total_Protiens'],axis=1)
-df=df.drop(['Albumin_and_Globulin_Ratio'],axis=1)
+df=df.drop(['Total_Bilirubin'], axis=1)
+df=df.drop(['Alamine_Aminotransferase'], axis=1)
+df=df.drop(['Total_Protiens'], axis=1)
+df=df.drop(['Albumin_and_Globulin_Ratio'], axis=1)
 df.columns
 
 # print 2 rows after column drop
@@ -84,8 +82,8 @@ knn_imputer = KNNImputer(n_neighbors=5)
 
 # Impute for class 0
 imputer = KNNImputer(n_neighbors=5)
-df_class_0 = pd.DataFrame(imputer.fit_transform(df_class_0),columns = df.columns)
-df_class_1 = pd.DataFrame(imputer.fit_transform(df_class_1),columns = df.columns)
+df_class_0 = pd.DataFrame(imputer.fit_transform(df_class_0), columns = df.columns)
+df_class_1 = pd.DataFrame(imputer.fit_transform(df_class_1), columns = df.columns)
 df_imputed = pd.concat([df_class_0, df_class_1])
 
 # Split the data into features (X) and target (y)
@@ -127,21 +125,11 @@ print('Best hyperparameters:',  grid_search.best_params_)
 
 best_rf_model = grid_search.best_estimator_
 
-# Evaluate the Random Forest model
-#y_pred_rf = best_rf_model.predict(X_test)
-
-# Print evaluation metrics
-#print("Random Forest Model [80-20 split results]:")
-#print("Accuracy:", accuracy_score(Y_test, y_pred_rf))
-#print('\n')
-#print(confusion_matrix(Y_test, y_pred_rf))
-#print('\n')
-#print("Classification Report:\n", classification_report(Y_test, y_pred_rf))
 
 print('Training Liver disease model completed')
 print('saving model')
 
-joblib.dump(best_rf_model,'best_rf_model.joblib')
+joblib.dump(best_rf_model, 'best_rf_model.joblib')
 joblib.dump(scaler, 'scaler.joblib')
 
 print('Model saved')
