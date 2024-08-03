@@ -68,8 +68,10 @@ knn_imputer = KNNImputer(n_neighbors=5)
 imputer = KNNImputer(n_neighbors=5)
 df_class_0 = pd.DataFrame(
     imputer.fit_transform(df_class_0),
-    columns = df.columns)
-df_class_1 = pd.DataFrame(imputer.fit_transform(df_class_1), columns = df.columns)
+    columns= df.columns)
+df_class_1 = pd.DataFrame(
+    imputer.fit_transform(df_class_1),
+    columns= df.columns)
 df_imputed = pd.concat([df_class_0, df_class_1])
 
 # Split the data into features (X) and target (y)
@@ -80,10 +82,12 @@ X = df_imputed.drop(['Dataset_Encoded'], axis=1)
 
 
 # spliting train and test dataset (80:20)
-X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=0)
+X_train, X_test, Y_train, Y_test = train_test_split(
+    X, Y, test_size=0.2, random_state=0)
 
 # spliting train and test dataset (85:15)
-X_trainb, X_testb, Y_trainb, Y_testb = train_test_split(X, Y, test_size=0.15, random_state=0)
+X_trainb, X_testb, Y_trainb, Y_testb = train_test_split(
+    X, Y, test_size=0.15, random_state=0)
 
 # Standardize features
 scaler = StandardScaler()
@@ -103,7 +107,10 @@ param_grid = {
     'max_depth': [3, 5, 7],
 }
 
-grid_search = GridSearchCV(estimator=rf_classifier, param_grid=param_grid, cv=5)
+grid_search = GridSearchCV(
+    estimator=rf_classifier,
+    param_grid=param_grid,
+    cv=5)
 grid_search.fit(X_train, Y_train)
 
 # Print the best hyperparameters found from above grid search.
