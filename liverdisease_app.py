@@ -8,6 +8,7 @@ app = Flask(__name__)
 rfm = joblib.load('best_rf_model.joblib')
 scaler = joblib.load('scaler.joblib')
 
+
 @app.route('/')
 def home():
     return "LiverDisease Classifier API"
