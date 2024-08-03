@@ -14,7 +14,6 @@ scaler = joblib.load('scaler.joblib')
 def home():
     return "LiverDisease Classifier API"
 
-
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.get_json(force=True)
