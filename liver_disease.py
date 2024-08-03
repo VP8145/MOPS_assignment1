@@ -26,7 +26,7 @@ class_counts = data['Dataset'].value_counts()
 print(class_counts)
 
 
-#column list
+
 data.columns
 
 
@@ -46,36 +46,36 @@ label_encoder = LabelEncoder()
 df['Dataset_Encoded'] = label_encoder.fit_transform(df['Dataset'])
 
 # Display the DataFrame with label encoding
-df=df.drop(['Dataset'], axis=1)
+df = df.drop(['Dataset'], axis=1)
 df.shape
 
 
 # based on above co relation analysis
 
 
-df=df.drop(['Total_Bilirubin'], axis=1)
-df=df.drop(['Alamine_Aminotransferase'], axis=1)
-df=df.drop(['Total_Protiens'], axis=1)
-df=df.drop(['Albumin_and_Globulin_Ratio'], axis=1)
+df = df.drop(['Total_Bilirubin'], axis=1)
+df = df.drop(['Alamine_Aminotransferase'], axis=1)
+df = df.drop(['Total_Protiens'], axis=1)
+df = df.drop(['Albumin_and_Globulin_Ratio'], axis=1)
 df.columns
 
 # print 2 rows after column drop
 print('---------- After droppping columns ----------')
 print(df.head(2))
 
-#Normalization with minmax scaler
+
 
 scaler = MinMaxScaler()
-df = pd.DataFrame(scaler.fit_transform(df), columns = df.columns)
+df = pd.DataFrame(scaler.fit_transform(df), columns=df.columns)
 
-# Filling the null values based on the KNN imputer so that the nulls get replaced by the appropriate values.
+
 
 # Separate the data into two DataFrames based on the target variable
 df_class_0 = df.loc[df['Dataset_Encoded'] == 0]
 df_class_1 = df.loc[df['Dataset_Encoded'] == 1]
 
-print('df_class_0.shape ',df_class_0.shape)
-print('df_class_1.shape ',df_class_1.shape)
+print('df_class_0.shape ', df_class_0.shape)
+print('df_class_1.shape ', df_class_1.shape)
 
 # Impute missing values separately for each class using KNNImputer
 knn_imputer = KNNImputer(n_neighbors=5)
@@ -108,8 +108,8 @@ X_test = scaler.transform(X_test)
 # Build a Random Forest classifier
 rf_classifier = RandomForestClassifier(random_state=42)
 
-# Tune hyperparameters using GridSearchCV 
-# experimenting with number of trees 5,10,20,30 and maximum depth 3,5,7. 
+# Tune hyperparameters using GridSearchCV
+# experimenting with number of trees 5,10,20,30 and maximum depth 3,5,7
 # Since we have just 6 features after data cleaning and limited samples the above chosen trees and depth seems ok.
  
 param_grid = {
