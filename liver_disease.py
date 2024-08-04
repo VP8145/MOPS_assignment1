@@ -27,9 +27,9 @@ def preprocess_data(data):
     data = data.drop(['Dataset'], axis=1)
 
     # Dropping columns
-    columns_to_drop = ['Total_Bilirubin', 
-                       'Alamine_Aminotransferase', 
-                       'Total_Protiens', 
+    columns_to_drop = ['Total_Bilirubin',
+                       'Alamine_Aminotransferase',
+                       'Total_Protiens',
                        'Albumin_and_Globulin_Ratio']
     data = data.drop(columns_to_drop, axis=1)
     print('---------- After dropping columns ----------')
@@ -106,6 +106,7 @@ def main(location):
     X_train, X_test, Y_train, Y_test = split_data(data)
     model, scaler = train_model(X_train, Y_train)
     save_model(model, scaler)
+
 
 if __name__ == '__main__':
     main("liver_disease_1.csv")
