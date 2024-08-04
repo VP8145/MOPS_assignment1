@@ -52,7 +52,7 @@ jobs:
 
       - name: Run tests
         run: |
-          test.py
+          python test.py
 
   deploy:
     name: Deploy Model
