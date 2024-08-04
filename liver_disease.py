@@ -17,7 +17,6 @@ data.shape
 print(data.head(2))
 
 
-####
 
 # Data Insights
 
