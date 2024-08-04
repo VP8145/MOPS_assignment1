@@ -17,9 +17,6 @@ data.shape
 print(data.head(2))
 
 
-
-# Data Insights
-
 # Count the number of samples in each class
 class_counts = data['Dataset'].value_counts()
 print(class_counts)
