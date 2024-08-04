@@ -53,6 +53,8 @@ jobs:
       - name: Run tests
         run: |
           python test.py
+          python -m unittest unittest_liver_disease.py
+
 
   deploy:
     name: Deploy Model
